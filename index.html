@@ -3,10 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Jaime Criado Martin | Biomedical Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <h1>Hello, World!</h1>
-    <p>Welcome to my website hosted on Vercel.</p>
-</body>
-</html>
+<body data-theme="light">
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">JCM</div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#education">Education</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#awards">Awards</a>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about" class="hero">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Jaime Criado Martin</h1>
+                    <div class="subtitle">Biomedical Engineer</div>
+                    <p class="bio">Results-driven Biomedical Engineer with a strong foundation in medical imaging analysis, software development, and cardiovascular modeling. Skilled in tackling complex medical challenges and developing innovative, data-driven solutions.</p>
+                    <div class="contact-info">
+                        <a href="mailto:jaimecriado02@gmail.com">
+                            <i class="fas fa-envelope"></i>
+                            jaimecriado02@gmail.com
+                        </a>
+                        <a href="tel:+34636792992">
+                            <i class="fas fa-phone"></i>
+                            +34 636792992
+                        </a>
+                        <a href="https://www.linkedin.com/in/jaimecriado" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            linkedin.com/in/jaimecriado
+                        </a>
+                        <a href="https://github.com/Jaimecm02" target="_blank">
+                            <i class="fab fa-github"></i>
+                            github.com/Jaimecm02
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Valladolid, Spain
+                        </a>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Contact Me
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-download"></i>
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/api/placeholder/400/400" alt="Jaime Criado Martin">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming Languages & Tools</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check-circle"></i> Python (Advanced): NumPy, SciPy, Pandas, Matplotlib</li>
+                        <li><i class="fas fa-check-circle"></i> AI/ML: TensorFlow, PyTorch, YOLO, OpenCV</li>
+                        <li><i class="fas fa-check-circle"></i> Web: JavaScript, React.js, HTML5, CSS3</li>
+                        <li><i class="fas fa-check-circle"></i> Version Control: Git, VS Code, MATLAB</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Medical Software & 3D Modeling</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check-circle"></i> 3D Slicer (Advanced)</li>
+                        <li><i class="fas fa-check-circle"></i> Blender</li>
+                        <li><i class="fas fa-check-circle"></i> Medical Imaging Processing</li>
+                        <li><i class="fas fa-check-circle"></i> Biomodel Development</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Domain Expertise</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check-circle"></i> Medical Image Analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Signal Processing</li>
+                        <li><i class="fas fa-check-circle"></i> Biomechanics</li>
+                        <li><i class="fas fa-check-circle"></i> Cardiovascular Modeling</li>
+                        <li><i class="fas fa-check-circle"></i> Machine Learning in Healthcare</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Aug 2024 - Dec 2024</span>
+                        <h3 class="timeline-title">Biomedical Engineer</h3>
+                        <div class="timeline-location">Hospital Clinico Universitario Valladolid ICICOR, Spain</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Lead development of biomodels for ascending aorta analysis in pre- and post-TAVI patients</li>
+                                <li>Implement advanced 3D registration techniques for accurate deformation calculations</li>
+                                <li>Conduct statistical analysis of patient outcomes and treatment effectiveness</li>
+                                <li>Collaborate with clinical teams to optimize analysis workflows</li>
+                            </ul>
+                            <p><strong>Technologies:</strong> Python (NumPy, SimpleITK, Pandas), Plotly Dash, 3D Slicer, Blender</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Jan 2024 - Jul 2024</span>
+                        <h3 class="timeline-title">Software Developer</h3>
+                        <div class="timeline-location">KTH Royal Institute of Technology, Stockholm, Sweden</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Engineered custom software solutions for Abdominal Aortic Aneurysm (AAA) analysis</li>
+                                <li>Developed automated geometric feature extraction algorithms for 3D aortic models</li>
+                                <li>Computational fluid simulation and biomodeling</li>
+                                <li>Implemented data analysis pipelines to process and visualize patient data</li>
+                            </ul>
+                            <p><strong>Technologies:</strong> Python (PyVista, NumPy, Pandas, Matplotlib, Tkinter)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-card">
+                <span class="education-date">2020 - 2024</span>
+                <h3 class="education-degree">Bachelor's Degree in Biomedical Engineering</h3>
+                <div class="education-school">University of Valladolid, Spain</div>
+                <div class="education-description">
+                    <p><strong>Relevant Coursework:</strong> Medical Imaging, Signal Processing, Biomechanics, Machine Learning</p>
+                    <p><strong>Senior Thesis:</strong> "Geometric Features Extraction and Analysis of Abdominal Aortic Aneurysms"</p>
+                </div>
+            </div>
+            <div class="education-card">
+                <span class="education-date">2018 - 2020</span>
+                <h3 class="education-degree">Secondary Education - Science and Technology Track</h3>
+                <div class="education-school">Colegio Nuestra Señora de Lourdes, Valladolid, Spain</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Personal Projects</h2>
+            <div class="project-card">
+                <span class="project-date">2022 - Present</span>
+                <h3 class="project-title">Software Development Portfolio</h3>
+                <div class="project-category">Open Source Projects</div>
+                <div class="project-description">
+                    <ul>
+                        <li>Developed multiple data science projects using Python ecosystem (NumPy, scikit-learn, Matplotlib, SciPy) for data analysis and visualization</li>
+                        <li>Built responsive web applications with modern stack (React.js, JavaScript, HTML5, CSS3) implementing RESTful APIs</li>
+                        <li>Created automated data processing pipelines and interactive dashboards</li>
+                        <li>All projects are documented and available on GitHub with detailed README files</li>
+                    </ul>
+                </div>
+                <a href="https://github.com/Jaimecm02" class="project-link" target="_blank">
+                    View Projects
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="project-card">
+                <span class="project-date">2022 - 2023</span>
+                <h3 class="project-title">Volunteer Social Assistant</h3>
+                <div class="project-category">Asalvo, Valladolid, Spain</div>
+                <div class="project-description">
+                    <ul>
+                        <li>Support community initiatives providing assistance to homeless individuals and disadvantaged families</li>
+                        <li>Developed strong interpersonal skills through direct interaction with vulnerable populations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="awards" class="awards">
+        <div class="container">
+            <h2 class="section-title">Awards & Achievements</h2>
+            <div class="awards-container">
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="award-title">Sergio Marchionne Scholarship (2022)</h3>
+                    <p>Awarded for academic excellence</p>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="award-title">Cambridge English: C1 Advanced Certificate (CAE)</h3>
+                    <p>Advanced English language proficiency</p>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="award-title">Introduction to AI and Prompt Engineering</h3>
+                    <p>Microsoft and Founderz (2025)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="languages-interests" class="languages-interests">
+        <div class="container">
+            <h2 class="section-title">Languages & Interests</h2>
+            <div class="language-interests-grid">
+                <div class="languages-card">
+                    <h3>Languages</h3>
+                    <div class="language-item">
+                        <i class="fas fa-language"></i>
+                        <span class="language-name">Spanish</span>
+                        <span class="language-level">(Native)</span>
+                    </div>
+                    <div class="language-item">
+                        <i class="fas fa-language"></i>
+                        <span class="language-name">English</span>
+                        <span class="language-level">(C1 Advanced)</span>
+                    </div>
+                    <h3 style="margin-top: 30px;">Mobility</h3>
+                    <div class="language-item">
+                        <i class="fas fa-car"></i>
+                        <span class="language-name">Valid Class B Driver's License</span>
+                    </div>
+                    <div class="language-item">
+                        <i class="fas fa-plane"></i>
+                        <span class="language-name">Available for relocation or travel</span>
+                    </div>
+                </div>
+                <div class="interests-card">
+                    <h3>Professional Interests</h3>
+                    <div class="interest-item">
+                        <i class="fas fa-microscope"></i>
+                        <span class="interest-name">Medical Image Processing</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-brain"></i>
+                        <span class="interest-name">Machine Learning in Healthcare</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-cube"></i>
+                        <span class="interest-name">3D Modeling & Simulation</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-heartbeat"></i>
+                        <span class="interest-name">Healthcare Technology Innovation</span>
+                    </div>
+                    <h3 style="margin-top: 30px;">Hobbies</h3>
+                    <div class="interest-item">
+                        <i class="fas fa-music"></i>
+                        <span class="interest-name">Playing Guitar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
