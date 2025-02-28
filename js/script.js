@@ -95,13 +95,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const projectPreviews = {
         'Document Similarity Analyzer': {
             type: 'image',
-            src: '/api/placeholder/540/360',
+            src: 'assets/images/DocumentSimilarityScreenshot.png',
             alt: 'Document Similarity Tool Interface',
             caption: 'TF-IDF visualization of document similarity'
         },
         'Daily Habit Tracker': {
             type: 'gif',
-            src: '/api/placeholder/540/360',
+            src: 'assets/images/HabitTrackerScreenshot.png',
             alt: 'Habit Tracker App Demo',
             caption: 'User interface for tracking daily habits'
         },
