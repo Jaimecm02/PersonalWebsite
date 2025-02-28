@@ -1,4 +1,4 @@
-// Get the theme toggle button
+// Theme toggle functionality
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
@@ -34,13 +34,33 @@ themeToggle.addEventListener('click', () => {
 // Mobile menu functionality
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
+const menuBackdrop = document.createElement('div');
+document.body.appendChild(menuBackdrop);
 
 mobileMenuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('show');
+    menuBackdrop.classList.toggle('show');
+    mobileMenuBtn.classList.toggle('active');
 });
 
+// Close the menu when clicking outside or on the backdrop
+menuBackdrop.addEventListener('click', () => {
+    navLinks.classList.remove('show');
+    menuBackdrop.classList.remove('show');
+    mobileMenuBtn.classList.remove('active');
+});
+
+// Close the menu when a link is clicked (optional)
+navLinks.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+        navLinks.classList.remove('show');
+        menuBackdrop.classList.remove('show');
+        mobileMenuBtn.classList.remove('active');
+    }
+});
+
+// Contact and CV download functionality
 document.addEventListener("DOMContentLoaded", function () {
-    // Get buttons
     const contactBtn = document.querySelector(".btn-primary");
     const downloadBtn = document.querySelector(".btn-outline");
 
@@ -64,4 +84,121 @@ document.addEventListener("DOMContentLoaded", function () {
         link.click();
         document.body.removeChild(link);
     });
+});
+
+// JavaScript to handle the project previews
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on mobile
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    
+    // Project data with preview information
+    const projectPreviews = {
+        'Document Similarity Analyzer': {
+            type: 'image',
+            src: '/api/placeholder/540/360',
+            alt: 'Document Similarity Tool Interface',
+            caption: 'TF-IDF visualization of document similarity'
+        },
+        'Daily Habit Tracker': {
+            type: 'gif',
+            src: '/api/placeholder/540/360',
+            alt: 'Habit Tracker App Demo',
+            caption: 'User interface for tracking daily habits'
+        },
+        'Game of Life Implementation': {
+            type: 'video',
+            src: '/api/placeholder/540/360',
+            alt: 'Game of Life Animation',
+            caption: 'Pattern evolution in Conway\'s Game of Life'
+        }
+    };
+    
+    // Get all project cards
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    // For each project card
+    projectCards.forEach(card => {
+        // Get the project title
+        const titleElement = card.querySelector('.project-title');
+        const title = titleElement.textContent;
+        
+        // Get preview data for this project
+        const previewData = projectPreviews[title];
+        
+        if (previewData) {
+            // Create preview container
+            const previewContainer = document.createElement('div');
+            previewContainer.className = 'project-preview';
+            
+            // Create preview content
+            let previewContent;
+            if (previewData.type === 'video') {
+                previewContent = document.createElement('video');
+                previewContent.src = previewData.src;
+                previewContent.alt = previewData.alt;
+                previewContent.autoplay = true;
+                previewContent.loop = true;
+                previewContent.muted = true;
+            } else {
+                // For both image and gif
+                previewContent = document.createElement('img');
+                previewContent.src = previewData.src;
+                previewContent.alt = previewData.alt;
+            }
+            
+            // Add caption
+            const caption = document.createElement('div');
+            caption.className = 'preview-caption';
+            caption.textContent = previewData.caption;
+            
+            // Add to preview container
+            previewContainer.appendChild(previewContent);
+            previewContainer.appendChild(caption);
+            
+            // For mobile, add a close button
+            if (isMobile) {
+                const closeButton = document.createElement('button');
+                closeButton.className = 'preview-close';
+                closeButton.innerHTML = '&times;';
+                closeButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    previewContainer.classList.remove('show');
+                });
+                previewContainer.appendChild(closeButton);
+                
+                // Show preview on tap
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on the link
+                    if (!e.target.closest('.project-link')) {
+                        e.preventDefault();
+                        previewContainer.classList.add('show');
+                    }
+                });
+            }
+            
+            // Create a wrapper for the existing content
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'project-content';
+            
+            // Move all existing children to the wrapper
+            while (card.firstChild) {
+                contentWrapper.appendChild(card.firstChild);
+            }
+            
+            // Add the content wrapper and preview to the card
+            card.appendChild(contentWrapper);
+            card.appendChild(previewContainer);
+        }
+    });
+    
+    // Close all previews when clicking outside
+    if (isMobile) {
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.project-preview') && !e.target.closest('.project-card')) {
+                document.querySelectorAll('.project-preview.show').forEach(preview => {
+                    preview.classList.remove('show');
+                });
+            }
+        });
+    }
 });

@@ -1,0 +1,33 @@
+@import 'variables.css';
+
+.awards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.award-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.award-card:hover {
+    transform: translateY(-5px);
+}
+
+.award-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.award-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}

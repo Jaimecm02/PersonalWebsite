@@ -1,0 +1,35 @@
+@import 'variables.css';
+
+.languages-interests {
+    background-color: var(--section-bg);
+    padding: 80px 0;
+}
+
+.language-interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.languages-card, .interests-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.language-item, .interest-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.language-name, .interest-name {
+    font-weight: 500;
+}
+
+.language-level {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
