@@ -109,3 +109,47 @@ h1 {
     color: white;
     transform: translateY(-3px);
 }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content h1,
+.hero-content .bio,
+.hero-content .contact-info,
+.hero-content .cta-buttons {
+    opacity: 0;
+}
+
+.hero-content.animate-hero h1 {
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+.hero-content.animate-hero .bio {
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+.hero-content.animate-hero .contact-info {
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.9s;
+}
+
+.hero-content.animate-hero .cta-buttons {
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 1.2s;
+}
+
+.subtitle {
+    opacity: 0; /* Start with the subtitle hidden */
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.9s; /* Delay to allow the scramble effect to start */
+}
