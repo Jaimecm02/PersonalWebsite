@@ -1,0 +1,26 @@
+@import 'variables.css';
+
+.page-wrap {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 1000;
+    transition: transform 0.5s ease-in-out;
+    transform: translateY(0);
+}
+
+.page-wrap.reveal {
+    transform: translateY(-100vh); 
+}
+
+.start {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 0;
+    gap: 60px;
+    height: 100vh;
+    background-color: var(--section-bg);
+}
+

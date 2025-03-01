@@ -8,6 +8,8 @@
     --section-bg: #f3f4f6;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    --header-bg: rgba(255, 255, 255, 0.8);
+    --header-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] {
@@ -19,4 +21,6 @@
     --border-color: #333;
     --section-bg: #242424;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --header-bg: rgba(30, 30, 30, 0.8);
+    --header-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }

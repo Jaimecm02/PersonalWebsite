@@ -20,7 +20,7 @@ body {
   color: var(--text-color);
   transition: var(--transition);
   line-height: 1.6;
-  font-family: 'JetBrains Mono', monospace; /* Ensure JetBrains Mono is the primary font */
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .container {

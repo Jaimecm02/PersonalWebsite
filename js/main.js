@@ -13,12 +13,19 @@ if (savedTheme) {
     updateThemeIcon('light');
 }
 
-// Function to update the theme icon
+// Function to update the theme icon with animation
 function updateThemeIcon(theme) {
+    const icons = themeToggle.querySelectorAll('.icon');
+    icons.forEach(icon => {
+        icon.classList.remove('showing', 'hiding', 'hidden');
+    });
+
     if (theme === 'dark') {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Sun icon for light mode
+        icons[0].classList.add('hiding'); // Hide moon icon
+        icons[1].classList.add('showing'); // Show sun icon
     } else {
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Moon icon for dark mode
+        icons[1].classList.add('hiding'); // Hide sun icon
+        icons[0].classList.add('showing'); // Show moon icon
     }
 }
 
@@ -94,12 +101,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageWrap = document.querySelector('.page-wrap');
     pageWrap.classList.add('reveal');
 
+    const header = document.querySelector('header');
+    const startSection = document.querySelector('#start');
+    const startSectionHeight = startSection.offsetHeight;
+
+    function checkScroll() {
+        const scrollPosition = window.scrollY;
+
+        if (scrollPosition > startSectionHeight) {
+            header.classList.add('visible');
+        } else {
+            header.classList.remove('visible');
+        }
+    }
+
+    // Initial check in case the page is loaded with a scroll position
+    checkScroll();
+
+    // Add scroll event listener
+    window.addEventListener('scroll', checkScroll);
+
     const heroContent = document.querySelector('.hero-content');
     const subtitle = document.querySelector('.subtitle');
 
     setTimeout(() => {
         heroContent.classList.add('animate-hero');
         subtitle.computedStyleMap.opacity = 1;
+        pageWrap.style.display = 'none';
     }, 500);
 
     textScrumbleAnimation();
