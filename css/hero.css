@@ -77,6 +77,7 @@ h1 {
     gap: 15px;
 }
 
+/* Base button styles */
 .btn {
     padding: 12px 24px;
     border-radius: 30px;
@@ -88,6 +89,7 @@ h1 {
     gap: 8px;
 }
 
+/* Primary button style */
 .btn-primary {
     background-color: var(--primary-color);
     color: white;
@@ -99,6 +101,7 @@ h1 {
     transform: translateY(-3px);
 }
 
+/* Outline button style */
 .btn-outline {
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
@@ -107,6 +110,18 @@ h1 {
 .btn-outline:hover {
     background-color: var(--primary-color);
     color: white;
+    transform: translateY(-3px);
+}
+
+/* Additional button styles can be added here */
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
     transform: translateY(-3px);
 }
 

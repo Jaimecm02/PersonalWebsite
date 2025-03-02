@@ -13,3 +13,8 @@
 @import 'footer.css';
 @import 'responsive.css';
 @import 'start.css';
+
+/*Smooth Scroll*/
+html {
+  scroll-behavior: smooth;
+}
