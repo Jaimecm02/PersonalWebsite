@@ -1,0 +1,5 @@
+es mas logico que la header aparezca al scrollear hacia arriba?
+implementar efecto red/blue a imagenes
+mover imagen a un lado 
+cambiar personal projects
+botton change mood?

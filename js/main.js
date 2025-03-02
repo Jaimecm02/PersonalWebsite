@@ -68,16 +68,16 @@ navLinks.addEventListener('click', (e) => {
 
 // Contact and CV download functionality
 document.addEventListener("DOMContentLoaded", function () {
-    const contactBtn = document.querySelector(".btn-primary");
-    const downloadBtn = document.querySelector(".btn-outline");
+    const contactBtn = document.querySelector(".btn-contact");
+    const downloadBtn = document.querySelector(".btn-download-cv");
     textScrumbleAnimation();
 
-    // "Contact Me" button scrolls to the contact section
+    // "Contact Me" button scrolls to the about section
     contactBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        const contactSection = document.querySelector("#contact");
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: "smooth" });
+        const aboutSection = document.querySelector("#about");
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: "smooth" });
         }
     });
 
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pageWrap.classList.add('reveal');
 
     const header = document.querySelector('header');
-    const startSection = document.querySelector('#start');
+    const startSection = document.querySelector('.start');
     const startSectionHeight = startSection.offsetHeight;
 
     function checkScroll() {
@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const subtitle = document.querySelector('.subtitle');
 
     setTimeout(() => {
+        startSection.classList.add('animate');
         heroContent.classList.add('animate-hero');
         subtitle.computedStyleMap.opacity = 1;
         pageWrap.style.display = 'none';
@@ -244,74 +245,104 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function textScrumbleAnimation() {
-	const el = document.getElementById('text_scrumble')
-	if(el) {
-		let phrases = el.getAttribute('data-phrases').slice(0, -1)
-		phrases = phrases.split(',')
+document.addEventListener("DOMContentLoaded", function () {
+    // Download CV button in the hero section
+    const heroDownloadBtn = document.getElementById("hero-download-cv");
 
-		const fx = new TextScramble(el)
-		let counter = 0
-		const next = () => {
-			fx.setText(phrases[counter]).then(() => {
-				setTimeout(next, 1500)
-			})
-			counter = (counter + 1) % phrases.length
-		}
-		next()
-	}
+    // "Download CV" button triggers file download
+    heroDownloadBtn.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        const cvUrl = "assets/docs/Jaime_Criado_Martin_CV.pdf";
+        const link = document.createElement("a");
+        link.href = cvUrl;
+        link.download = "Jaime_Criado_Martin_CV.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
+    // Contact Me button scrolls to the contact section
+    const contactBtn = document.querySelector(".btn-primary");
+    contactBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        const contactSection = document.querySelector("#contact");
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+
+    // Text scramble animation
+    textScrumbleAnimation();
+});
+
+function textScrumbleAnimation() {
+    const el = document.getElementById('text_scrumble');
+    if(el) {
+        let phrases = el.getAttribute('data-phrases').slice(0, -1);
+        phrases = phrases.split(',');
+
+        const fx = new TextScramble(el);
+        let counter = 0;
+        const next = () => {
+            fx.setText(phrases[counter]).then(() => {
+                setTimeout(next, 1500);
+            });
+            counter = (counter + 1) % phrases.length;
+        };
+        next();
+    }
 }
 
 class TextScramble {
-	constructor(el) {
-		this.el = el
-		this.chars = '!<>-_\\/[]{}—=+*^?#________'
-		this.update = this.update.bind(this)
-	}
-	setText(newText) {
-		const oldText = this.el.innerText
-		const length = Math.max(oldText.length, newText.length)
-		const promise = new Promise((resolve) => this.resolve = resolve)
-		this.queue = []
-		for (let i = 0; i < length; i++) {
-			const from = oldText[i] || ''
-			const to = newText[i] || ''
-			const start = Math.floor(Math.random() * 50)
-			const end = start + Math.floor(Math.random() * 50)
-			this.queue.push({ from, to, start, end })
-		}
-		cancelAnimationFrame(this.frameRequest)
-		this.frame = 0
-		this.update()
-		return promise
-	}
-	update() {
-		let output = ''
-		let complete = 0
-		for (let i = 0, n = this.queue.length; i < n; i++) {
-			let { from, to, start, end, char } = this.queue[i]
-			if (this.frame >= end) {
-				complete++
-				output += to
-			} else if (this.frame >= start) {
-				if (!char || Math.random() < 0.28) {
-					char = this.randomChar()
-					this.queue[i].char = char
-				}
-				output += `<span class="dud">${char}</span>`
-			} else {
-				output += from
-			}
-		}
-		this.el.innerHTML = output
-		if (complete === this.queue.length) {
-			this.resolve()
-		} else {
-			this.frameRequest = requestAnimationFrame(this.update)
-			this.frame++
-		}
-	}
-	randomChar() {
-		return this.chars[Math.floor(Math.random() * this.chars.length)]
-	}
+    constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+    }
+    setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 50);
+            const end = start + Math.floor(Math.random() * 50);
+            this.queue.push({ from, to, start, end });
+        }
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+    }
+    update() {
+        let output = '';
+        let complete = 0;
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+                complete++;
+                output += to;
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.randomChar();
+                    this.queue[i].char = char;
+                }
+                output += `<span class="dud">${char}</span>`;
+            } else {
+                output += from;
+            }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) {
+            this.resolve();
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+        }
+    }
+    randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
 }
