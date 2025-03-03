@@ -5,6 +5,16 @@
   --img-1: url("../assets/images/shader-image-1.png"); /* Path to your first shader image */
   --img-2: url("../assets/images/shader-image-2.png"); /* Path to your second shader image */
   --img-3: url("../assets/images/shader-image-3.png"); /* Path to your third shader image */
+  --saturate: 0;
+  --sepia: 0;
+  --hue: 0deg;
+}
+
+/* Dark mode shader color adjustments */
+[data-theme="dark"] {
+  --saturate: 0;
+  --sepia: 0;
+  --hue: 180deg;
 }
 
 .page-wrap {
@@ -32,40 +42,42 @@
 }
 
 .start.fake-shader {
-    --saturate: 0;
-    --sepia: 0;
-    --hue: 0deg;
-  
     background-size: cover;
     background-image: var(--img-1);
     animation: hue 20s linear infinite;
-  
-    > * { z-index: 3; }
-  
-    &::after, &::before {
-        content: '';
-        position: absolute;
-        z-index: 1;
-        inset: -100%;
-        background-size: cover;
-        animation: spin 0s infinite linear;
-        aspect-ratio: 1;
-        pointer-events: none;
-    }
-  
-    &::before {
-        mix-blend-mode: hard-light;
-        animation-duration: calc(1s * var(--speed-factor));
-        background-image: var(--img-2);
-    }
-  
-    &::after {
-        z-index: 2;
-        mix-blend-mode: lighten;
-        animation-direction: reverse;
-        animation-duration: calc(2.5s * var(--speed-factor));
-        background-image: var(--img-3);
-    }
+    position: relative;
+}
+
+.start.fake-shader > * { 
+    z-index: 3; 
+}
+
+/* Fix for mobile: using pseudo-elements differently */
+.start.fake-shader::before,
+.start.fake-shader::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    background-size: cover;
+    pointer-events: none;
+    transform-origin: center center;
+}
+
+.start.fake-shader::before {
+    mix-blend-mode: hard-light;
+    animation: spin calc(1s * var(--speed-factor)) infinite linear;
+    background-image: var(--img-2);
+}
+
+.start.fake-shader::after {
+    z-index: 2;
+    mix-blend-mode: lighten;
+    animation: spin calc(2.5s * var(--speed-factor)) infinite linear reverse;
+    background-image: var(--img-3);
 }
 
 .start-content {
@@ -172,6 +184,24 @@
 }
 
 @keyframes hue {
-    0% { filter: Saturate(var(--saturate)) Sepia(var(--sepia)) hue-rotate(0deg); }
-    100% { filter: Saturate(var(--saturate)) Sepia(var(--sepia)) hue-rotate(var(--hue)); }
+    0% { filter: saturate(var(--saturate)) sepia(var(--sepia)) hue-rotate(0deg); }
+    100% { filter: saturate(var(--saturate)) sepia(var(--sepia)) hue-rotate(var(--hue)); }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .start.fake-shader::before,
+    .start.fake-shader::after {
+        /* Reduce animation complexity on mobile */
+        animation-duration: calc(1.5s * var(--speed-factor));
+    }
+    
+    /* Adjust blend modes for better mobile performance */
+    .start.fake-shader::before {
+        mix-blend-mode: screen;
+    }
+    
+    .start.fake-shader::after {
+        mix-blend-mode: overlay;
+    }
 }
