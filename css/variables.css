@@ -13,8 +13,8 @@
 }
 
 [data-theme="dark"] {
-    --primary-color: #4cc9f0;
-    --secondary-color: #7209b7;
+    --primary-color: #ffffff;
+    --secondary-color: #ffffff;
     --text-color: #e0e0e0;
     --background-color: #121212;
     --card-bg: #1e1e1e;

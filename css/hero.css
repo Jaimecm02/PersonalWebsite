@@ -6,6 +6,7 @@
     justify-content: space-between;
     padding: 80px 0;
     gap: 60px;
+    position: relative;
 }
 
 .hero-content {
@@ -19,14 +20,14 @@
 }
 
 .hero-image img {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
+    width: 400px;
+    height: 600px;
     object-fit: cover;
     box-shadow: var(--shadow);
+    border-radius: 10px;
 }
 
-h1 {
+.hero-title {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -168,3 +169,30 @@ h1 {
     animation: fadeInUp 1s ease-out forwards;
     animation-delay: 0.9s; /* Delay to allow the scramble effect to start */
 }
+
+/* Mobile-first adjustments */
+@media (max-width: 767px) {
+    .hero {
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .hero-image {
+      order: 1; /* Move image below content */
+      width: 100%;
+    }
+  
+    .hero-image img {
+      width: 100%;
+      max-width: 600px;
+      height: 400px; /* More horizontal aspect ratio */
+    }
+  }
+  
+  /* Desktop-specific image sizing */
+  @media (min-width: 768px) {
+    .hero-image img {
+      width: 400px;
+      height: 600px; /* Maintain vertical aspect ratio */
+    }
+  }

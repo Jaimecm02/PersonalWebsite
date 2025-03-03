@@ -38,20 +38,11 @@
     <section id="start" class="start fake-shader">
         <div class="container">
             <div class="start-content">
-                <h1>JAIME CRIADO MARTIN</h1>
+                <h1 class="start-title">JAIME CRIADO MARTIN</h1>
                 <div class="start-subtitle" id="text_scrumble" data-phrases="Biomedical Engineer, Medical Imaging, AI in Healthcare, 3D Modeling, Software Engineer, Designer ">Biomedical Engineer</div>
-                <div class="buttons-scroll-container">
-                    <a href="#" class="btn btn-download-cv">
-                        {DOWNLOAD CV}
-                    </a>
-                    <div class="scroll-text">
-                        <span class="scroll-text-content">SCROLL</span>
-                    </div>
-                    <a href="#about" class="btn btn-contact">
-                        {CONTACT ME}
-                    </a>
-                </div>
             </div>
+            <a href="#" class="btn btn-download-cv">DOWNLOAD CV</a>
+            <a href="#about" class="btn btn-contact">CONTACT ME</a>   
         </div>
     </section>
 
@@ -59,7 +50,7 @@
         <div class="container">
             <div class="hero">
                 <div class="hero-content">
-                    <h1>JAIME CRIADO MARTIN</h1>
+                    <h1 class="hero-title">JAIME CRIADO MARTIN</h1>
                     <div class="subtitle" id="text_scrumble" data-phrases="Biomedical Engineer, Medical Imaging, AI in Healthcare, 3D Modeling, Software Engineer, Designer ">Biomedical Engineer</div>
                     <p class="bio">Results-driven Biomedical Engineer with a strong foundation in medical imaging analysis, software development, and cardiovascular modeling. Skilled in tackling complex medical challenges and developing innovative, data-driven solutions.</p>
                     <div class="contact-info">
@@ -95,7 +86,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="hero-image">
+                <div class="hero-image wrap-img-distortion">
                     <img src="assets/images/ProfileImage.jpeg" alt="Jaime Criado Martin">
                 </div>
             </div>
@@ -141,40 +132,61 @@
     <section id="experience" class="experience">
         <div class="container">
             <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <span class="timeline-date">Aug 2024 - Dec 2024</span>
-                        <h3 class="timeline-title">Biomedical Engineer</h3>
-                        <div class="timeline-location">Hospital Clinico Universitario Valladolid ICICOR, Spain</div>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Lead development of biomodels for ascending aorta analysis in pre- and post-TAVI patients</li>
-                                <li>Implement advanced 3D registration techniques for accurate deformation calculations</li>
-                                <li>Conduct statistical analysis of patient outcomes and treatment effectiveness</li>
-                                <li>Collaborate with clinical teams to optimize analysis workflows</li>
-                            </ul>
-                            <p><strong>Technologies:</strong> Python (NumPy, SimpleITK, Pandas), Plotly Dash, 3D Slicer, Blender</p>
+    
+            <article class="experience-article">
+                <div class="experience-content">
+                    <h3 class="experience-title">Biomedical Engineer</h3>
+                    <div class="experience-date">Aug 2024 - Dec 2024</div>
+                    <div class="experience-location">Hospital Clinico Universitario Valladolid ICICOR, Spain</div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Lead development of <span class="realistic-marker-highlight">biomodels</span> for ascending aorta analysis in pre- and post-TAVI patients</li>
+                            <li>Implement advanced <span class="realistic-marker-highlight">3D registration </span> techniques for accurate deformation calculations</li>
+                            <li>Conduct <span class="realistic-marker-highlight">statistical analysis</span> of patient outcomes and treatment effectiveness</li>
+                            <li>Collaborate with clinical teams to optimize analysis workflows</li>
+                        </ul>
+                        <div class="tech-container">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">NumPy</span>
+                            <span class="tech-badge">SimpleITK</span>
+                            <span class="tech-badge">Pandas</span>
+                            <span class="tech-badge">Plotly Dash</span>
+                            <span class="tech-badge">3D Slicer</span>
+                            <span class="tech-badge">Blender</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <span class="timeline-date">Jan 2024 - Jul 2024</span>
-                        <h3 class="timeline-title">Software Developer</h3>
-                        <div class="timeline-location">KTH Royal Institute of Technology, Stockholm, Sweden</div>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Engineered custom software solutions for Abdominal Aortic Aneurysm (AAA) analysis</li>
-                                <li>Developed automated geometric feature extraction algorithms for 3D aortic models</li>
-                                <li>Computational fluid simulation and biomodeling</li>
-                                <li>Implemented data analysis pipelines to process and visualize patient data</li>
-                            </ul>
-                            <p><strong>Technologies:</strong> Python (PyVista, NumPy, Pandas, Matplotlib, Tkinter)</p>
+                <div class="experience-gif">
+                    <img src="assets/images/foo4.gif" alt="Biomedical Engineering Visualization">
+                </div>
+            </article>
+    
+            <article class="experience-article">
+                <div class="experience-content">
+                    <h3 class="experience-title">Software Developer</h3>
+                    <div class="experience-date">Jan 2024 - Jul 2024</div>
+                    <div class="experience-location">KTH Royal Institute of Technology, Stockholm, Sweden</div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Engineered custom <span class="realistic-marker-highlight">software solutions</span> for Abdominal Aortic Aneurysm (AAA) analysis</li>
+                            <li>Developed automated geometric feature extraction algorithms for 3D aortic models</li>
+                            <li><span class="realistic-marker-highlight">Computational fluid simulation</span> and biomodeling</li>
+                            <li>Implemented <span class="realistic-marker-highlight">data analysis pipelines</span> to process and visualize patient data</li>
+                        </ul>
+                        <div class="tech-container">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">PyVista</span>
+                            <span class="tech-badge">NumPy</span>
+                            <span class="tech-badge">Pandas</span>
+                            <span class="tech-badge">Matplotlib</span>
+                            <span class="tech-badge">Tkinter</span>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="experience-gif">
+                    <img src="assets/images/foo4.gif" alt="Software Development Visualization">
+                </div>
+            </article>
         </div>
     </section>
 
@@ -364,6 +376,15 @@
             </div>
         </div>
     </section>
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters" style="display:none;">
+        <defs>
+            <filter id="marker-shape">
+                <feTurbulence type="fractalNoise" baseFrequency="0 0.15" numOctaves="1" result="warp" />
+                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic" in2="warp" />
+            </filter>
+        </defs>
+    </svg>
 
     <script src="js/main.js"></script>
 </body>

@@ -5,16 +5,6 @@
   --img-1: url("../assets/images/shader-image-1.png"); /* Path to your first shader image */
   --img-2: url("../assets/images/shader-image-2.png"); /* Path to your second shader image */
   --img-3: url("../assets/images/shader-image-3.png"); /* Path to your third shader image */
-  --saturate: 0;
-  --sepia: 0;
-  --hue: 0deg;
-}
-
-/* Dark mode shader color adjustments */
-[data-theme="dark"] {
-  --saturate: 0;
-  --sepia: 0;
-  --hue: 180deg;
 }
 
 .page-wrap {
@@ -42,42 +32,39 @@
 }
 
 .start.fake-shader {
+    --saturate: 0;
+    --sepia: 0;
+    --hue: 0deg;
+  
     background-size: cover;
     background-image: var(--img-1);
     animation: hue 20s linear infinite;
-    position: relative;
-}
-
-.start.fake-shader > * { 
-    z-index: 3; 
-}
-
-/* Fix for mobile: using pseudo-elements differently */
-.start.fake-shader::before,
-.start.fake-shader::after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    left: -50%;
-    top: -50%;
-    width: 200%;
-    height: 200%;
-    background-size: cover;
-    pointer-events: none;
-    transform-origin: center center;
-}
-
-.start.fake-shader::before {
-    mix-blend-mode: hard-light;
-    animation: spin calc(1s * var(--speed-factor)) infinite linear;
-    background-image: var(--img-2);
-}
-
-.start.fake-shader::after {
-    z-index: 2;
-    mix-blend-mode: lighten;
-    animation: spin calc(2.5s * var(--speed-factor)) infinite linear reverse;
-    background-image: var(--img-3);
+    > * { z-index: 3; }
+  
+    &::after, &::before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        inset: -150%;
+        background-size: cover;
+        animation: spin 0s infinite linear;
+        aspect-ratio: 1;
+        pointer-events: none;
+    }
+  
+    &::before {
+        mix-blend-mode: hard-light;
+        animation-duration: calc(1s * var(--speed-factor));
+        background-image: var(--img-2);
+    }
+  
+    &::after {
+        z-index: 2;
+        mix-blend-mode: lighten;
+        animation-direction: reverse;
+        animation-duration: calc(2.5s * var(--speed-factor));
+        background-image: var(--img-3);
+    }
 }
 
 .start-content {
@@ -86,9 +73,20 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 600px;
+    max-width: 1200px;
     padding: 20px;
     z-index: 3;
+}
+
+.start-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .start-subtitle {
@@ -98,17 +96,9 @@
     width: 100%;
 }
 
-.buttons-scroll-container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
 .btn-download-cv,
 .btn-contact {
-    font-size: 0.7rem;
+    font-size: .8rem;
     color: var(--text-color);
     text-decoration: none;
     border-radius: 5px;
@@ -130,53 +120,32 @@
 
 .start h1,
 .start-subtitle,
-.buttons-scroll-container {
+.btn-contact,
+.btn-download-cv {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .start h1 {
-    transition-delay: 0.5s;
+    transition-delay: 0.2s;
 }
 
 .start-subtitle {
-    transition-delay: 0.7s;
+    transition-delay: 0.5s;
 }
 
-.buttons-scroll-container {
+.btn-contact,
+.btn-download-cv {
     transition-delay: 0.9s;
 }
 
 .start.animate h1,
 .start.animate .start-subtitle,
-.start.animate .buttons-scroll-container {
+.start.animate .btn-contact,
+.start.animate .btn-download-cv {
     opacity: 1;
     transform: translateY(0);
-}
-
-.start.animate .buttons-scroll-container {
-    transform: translateX(0) translateY(0);
-}
-
-.start.animate .scroll-text {
-    animation: scrollAnimation 3s infinite;
-    animation-delay: 3.5s;
-}
-
-@keyframes scrollAnimation {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
 }
 
 @keyframes spin {
@@ -184,24 +153,6 @@
 }
 
 @keyframes hue {
-    0% { filter: saturate(var(--saturate)) sepia(var(--sepia)) hue-rotate(0deg); }
-    100% { filter: saturate(var(--saturate)) sepia(var(--sepia)) hue-rotate(var(--hue)); }
-}
-
-/* Mobile optimizations */
-@media (max-width: 768px) {
-    .start.fake-shader::before,
-    .start.fake-shader::after {
-        /* Reduce animation complexity on mobile */
-        animation-duration: calc(1.5s * var(--speed-factor));
-    }
-    
-    /* Adjust blend modes for better mobile performance */
-    .start.fake-shader::before {
-        mix-blend-mode: screen;
-    }
-    
-    .start.fake-shader::after {
-        mix-blend-mode: overlay;
-    }
+    0% { filter: Saturate(var(--saturate)) Sepia(var(--sepia)) hue-rotate(0deg); }
+    100% { filter: Saturate(var(--saturate)) Sepia(var(--sepia)) hue-rotate(var(--hue)); }
 }

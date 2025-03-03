@@ -1,103 +1,117 @@
-// Theme toggle functionality
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
-
-// Check for saved theme in localStorage
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    body.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-} else {
-    // Default to light theme
-    body.setAttribute('data-theme', 'light');
-    updateThemeIcon('light');
+// Reusable function for downloading CV
+function downloadCV() {
+    const cvUrl = "assets/docs/Jaime_Criado_Martin_CV.pdf";
+    const link = document.createElement("a");
+    link.href = cvUrl;
+    link.download = "Jaime_Criado_Martin_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
-// Function to update the theme icon with animation
-function updateThemeIcon(theme) {
-    const icons = themeToggle.querySelectorAll('.icon');
-    icons.forEach(icon => {
-        icon.classList.remove('showing', 'hiding', 'hidden');
-    });
-
-    if (theme === 'dark') {
-        icons[0].classList.add('hiding'); // Hide moon icon
-        icons[1].classList.add('showing'); // Show sun icon
-    } else {
-        icons[1].classList.add('hiding'); // Hide sun icon
-        icons[0].classList.add('showing'); // Show moon icon
+// Reusable function for scrolling to a section
+function scrollToSection(sectionId) {
+    const section = document.querySelector(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
     }
 }
 
-// Toggle theme on button click
-themeToggle.addEventListener('click', () => {
-    const currentTheme = body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    body.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme); // Save theme preference
-    updateThemeIcon(newTheme);
-});
+document.addEventListener("DOMContentLoaded", function () {
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
 
-// Mobile menu functionality
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
-const menuBackdrop = document.createElement('div');
-document.body.appendChild(menuBackdrop);
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+    } else {
+        // Default to light theme
+        body.setAttribute('data-theme', 'light');
+        updateThemeIcon('light');
+    }
 
-mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-    menuBackdrop.classList.toggle('show');
-    mobileMenuBtn.classList.toggle('active');
-});
+    // Function to update the theme icon with animation
+    function updateThemeIcon(theme) {
+        const icons = themeToggle.querySelectorAll('.icon');
+        icons.forEach(icon => {
+            icon.classList.remove('showing', 'hiding', 'hidden');
+        });
 
-// Close the menu when clicking outside or on the backdrop
-menuBackdrop.addEventListener('click', () => {
-    navLinks.classList.remove('show');
-    menuBackdrop.classList.remove('show');
-    mobileMenuBtn.classList.remove('active');
-});
+        if (theme === 'dark') {
+            icons[0].classList.add('hiding'); // Hide moon icon
+            icons[1].classList.add('showing'); // Show sun icon
+        } else {
+            icons[1].classList.add('hiding'); // Hide sun icon
+            icons[0].classList.add('showing'); // Show moon icon
+        }
+    }
 
-// Close the menu when a link is clicked (optional)
-navLinks.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') {
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // Save theme preference
+        updateThemeIcon(newTheme);
+    });
+
+    // Mobile menu functionality
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const menuBackdrop = document.createElement('div');
+    document.body.appendChild(menuBackdrop);
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+        menuBackdrop.classList.toggle('show');
+        mobileMenuBtn.classList.toggle('active');
+    });
+
+    // Close the menu when clicking outside or on the backdrop
+    menuBackdrop.addEventListener('click', () => {
         navLinks.classList.remove('show');
         menuBackdrop.classList.remove('show');
         mobileMenuBtn.classList.remove('active');
-    }
-});
+    });
 
-// Contact and CV download functionality
-document.addEventListener("DOMContentLoaded", function () {
+    // Close the menu when a link is clicked (optional)
+    navLinks.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            navLinks.classList.remove('show');
+            menuBackdrop.classList.remove('show');
+            mobileMenuBtn.classList.remove('active');
+        }
+    });
+
+    // Contact and CV download functionality
     const contactBtn = document.querySelector(".btn-contact");
     const downloadBtn = document.querySelector(".btn-download-cv");
-    textScrumbleAnimation();
+    const heroDownloadBtn = document.getElementById("hero-download-cv");
 
     // "Contact Me" button scrolls to the about section
     contactBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        const aboutSection = document.querySelector("#about");
-        if (aboutSection) {
-            aboutSection.scrollIntoView({ behavior: "smooth" });
-        }
+        scrollToSection("#about");
     });
 
     // "Download CV" button triggers file download
     downloadBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        const cvUrl = "assets/docs/Jaime_Criado_Martin_CV.pdf";
-        const link = document.createElement("a");
-        link.href = cvUrl;
-        link.download = "Jaime_Criado_Martin_CV.pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        downloadCV();
     });
-});
 
-document.addEventListener('DOMContentLoaded', function() {
+    // "Download CV" button in the hero section
+    heroDownloadBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        downloadCV();
+    });
+
     // Check if we're on mobile
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    
+
     const pageWrap = document.querySelector('.page-wrap');
     pageWrap.classList.add('reveal');
 
@@ -131,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         pageWrap.style.display = 'none';
     }, 500);
 
+    // Text scramble animation
     textScrumbleAnimation();
 
     // Project data with preview information
@@ -154,24 +169,24 @@ document.addEventListener('DOMContentLoaded', function() {
             caption: 'Pattern evolution in Conway\'s Game of Life'
         }
     };
-    
+
     // Get all project cards
     const projectCards = document.querySelectorAll('.project-card');
-    
+
     // For each project card
     projectCards.forEach(card => {
         // Get the project title
         const titleElement = card.querySelector('.project-title');
         const title = titleElement.textContent;
-        
+
         // Get preview data for this project
         const previewData = projectPreviews[title];
-        
+
         if (previewData) {
             // Create preview container
             const previewContainer = document.createElement('div');
             previewContainer.className = 'project-preview';
-            
+
             // Create preview content
             let previewContent;
             if (previewData.type === 'video') {
@@ -187,16 +202,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 previewContent.src = previewData.src;
                 previewContent.alt = previewData.alt;
             }
-            
+
             // Add caption
             const caption = document.createElement('div');
             caption.className = 'preview-caption';
             caption.textContent = previewData.caption;
-            
+
             // Add to preview container
             previewContainer.appendChild(previewContent);
             previewContainer.appendChild(caption);
-            
+
             // For mobile, add a close button
             if (isMobile) {
                 const closeButton = document.createElement('button');
@@ -207,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     previewContainer.classList.remove('show');
                 });
                 previewContainer.appendChild(closeButton);
-                
+
                 // Show preview on tap
                 card.addEventListener('click', function(e) {
                     // Don't trigger if clicking on the link
@@ -217,22 +232,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             }
-            
+
             // Create a wrapper for the existing content
             const contentWrapper = document.createElement('div');
             contentWrapper.className = 'project-content';
-            
+
             // Move all existing children to the wrapper
             while (card.firstChild) {
                 contentWrapper.appendChild(card.firstChild);
             }
-            
+
             // Add the content wrapper and preview to the card
             card.appendChild(contentWrapper);
             card.appendChild(previewContainer);
         }
     });
-    
+
     // Close all previews when clicking outside
     if (isMobile) {
         document.addEventListener('click', function(e) {
@@ -243,36 +258,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Download CV button in the hero section
-    const heroDownloadBtn = document.getElementById("hero-download-cv");
-
-    // "Download CV" button triggers file download
-    heroDownloadBtn.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default anchor behavior
-        const cvUrl = "assets/docs/Jaime_Criado_Martin_CV.pdf";
-        const link = document.createElement("a");
-        link.href = cvUrl;
-        link.download = "Jaime_Criado_Martin_CV.pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
-
-    // Contact Me button scrolls to the contact section
-    const contactBtn = document.querySelector(".btn-primary");
-    contactBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        const contactSection = document.querySelector("#contact");
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: "smooth" });
-        }
-    });
-
-    // Text scramble animation
-    textScrumbleAnimation();
 });
 
 function textScrumbleAnimation() {
