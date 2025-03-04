@@ -9,16 +9,19 @@
 
 .page-wrap {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: black;
-    z-index: 1000;
+    z-index: 9999; /* Increase z-index to ensure it's above everything */
     transition: transform 0.5s ease-in-out;
     transform: translateY(0);
+    pointer-events: none; /* Prevent it from blocking interactions */
 }
 
 .page-wrap.reveal {
-    transform: translateY(-100vh);
+    transform: translateY(-100%);
 }
 
 .start {
@@ -29,6 +32,15 @@
     background-color: var(--section-bg);
     position: relative;
     overflow: hidden;
+}
+
+.start {
+    position: fixed; /* Change from relative to fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
 }
 
 .start.fake-shader {
@@ -83,10 +95,7 @@
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
 }
 
 .start-subtitle {

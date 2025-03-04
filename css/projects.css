@@ -9,16 +9,9 @@
     border-radius: 10px;
     padding: 30px;
     box-shadow: var(--shadow);
-    transition: var(--transition);
     text-align: center;
     position: relative;
-    overflow: hidden;
     margin-bottom: 20px;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .project-icon {
@@ -52,35 +45,17 @@
     color: var(--primary-color);
     font-weight: 600;
     gap: 8px;
-    transition: var(--transition);
-}
-
-.project-link:hover {
-    color: var(--secondary-color);
 }
 
 /* Project Preview Styles */
 .project-preview {
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin-top: 20px;
     width: 100%;
-    height: 100%;
-    background-color: var(--card-bg);
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    transform: translateY(100%);
-    transition: opacity 0.3s ease, transform 0.7s ease;
-    z-index: 5;
+    flex-direction: column;
     padding: 20px;
-    border-radius: 10px;
-}
-
-.project-card:hover .project-preview {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .project-preview img,
@@ -92,8 +67,7 @@
 }
 
 .preview-caption {
-    position: absolute;
-    bottom: 15px;
+    margin-top: 15px;
     width: 100%;
     text-align: center;
     font-size: 0.9rem;
@@ -101,58 +75,42 @@
     font-weight: 500;
 }
 
-/* Ensure content stays visible during hover transition */
 .project-content {
     position: relative;
-    z-index: 1;
     background-color: var(--card-bg);
-    transition: transform 0.3s ease;
 }
 
-.project-card:hover .project-content {
-    transform: translateY(-100%);
-}
-
-/* Mobile Tap Behavior */
+/* Mobile Styles */
 @media (max-width: 768px) {
     .project-preview {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.9);
-        width: 90%;
-        height: auto;
-        max-height: 80vh;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 1000;
-        border-radius: 10px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        margin-top: 15px;
+        padding: 10px;
     }
+}
 
-    .project-preview.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(-50%, -50%) scale(1);
-    }
+.game-controls {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
 
-    .project-card:hover .project-content {
-        transform: none;
-    }
+.game-controls button {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
 
-    .preview-close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.game-controls button:hover {
+    background-color: var(--secondary-color);
+}
+
+#gameOfLife {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
 }

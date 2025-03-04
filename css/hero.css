@@ -9,6 +9,38 @@
     position: relative;
 }
 
+.hero {
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    z-index: 3;
+    margin-top: 100vh; /* Add this to position the hero section below the start section */
+}
+
+.start {
+    /* Add to existing start styles */
+    transition: opacity 0.3s ease-out;
+}
+
+.hero {
+    /* Add to existing hero styles */
+    transform: translateY(0);
+    will-change: transform;
+}
+
+/* Optional: Add a background to hero section to ensure content is visible */
+.hero .container {
+    background-color: var(--background-color);
+    position: relative;
+    z-index: 2;
+}
+
+.scroll-container {
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+}
+
 .hero-content {
     flex: 1;
 }
@@ -32,10 +64,7 @@
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
 }
 
 .subtitle {
@@ -204,7 +233,7 @@
     }
 
     .hero-image img {
-        width: 400px;
-        height: 600px; /* Maintain vertical aspect ratio */
+        width: 350px;
+        height: 550px; /* Maintain vertical aspect ratio */
     }
 }

@@ -138,12 +138,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const heroContent = document.querySelector('.hero-content');
     const subtitle = document.querySelector('.subtitle');
 
+    const transitionDuration = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-wrap-transition')) * 1000;
+
     setTimeout(() => {
         startSection.classList.add('animate');
         heroContent.classList.add('animate-hero');
         subtitle.computedStyleMap.opacity = 1;
         pageWrap.style.display = 'none';
-    }, 500);
+    }, transitionDuration);
 
     // Text scramble animation
     textScrumbleAnimation();
@@ -162,12 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
             alt: 'Habit Tracker App Demo',
             caption: 'User interface for tracking daily habits'
         },
-        'Game of Life Implementation': {
-            type: 'video',
-            src: 'assets/images/game_of_life.mp4',
-            alt: 'Game of Life Animation',
-            caption: 'Pattern evolution in Conway\'s Game of Life'
-        }
     };
 
     // Get all project cards
@@ -331,3 +327,21 @@ class TextScramble {
         return this.chars[Math.floor(Math.random() * this.chars.length)];
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const startSection = document.querySelector('.start');
+    const heroSection = document.querySelector('.hero');
+    
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        const heroOffset = heroSection.offsetTop - window.innerHeight;
+        
+        // Add fade effect to start section as hero section covers it
+        if (scrollPosition >= heroOffset) {
+            const opacity = 1 - (scrollPosition - heroOffset) / window.innerHeight;
+            startSection.style.opacity = Math.max(opacity, 0);
+        } else {
+            startSection.style.opacity = 1;
+        }
+    });
+});

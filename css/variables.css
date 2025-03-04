@@ -10,6 +10,7 @@
     --transition: all 0.3s ease;
     --header-bg: rgba(255, 255, 255, 0.8);
     --header-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --page-wrap-transition: 0.5s;
 }
 
 [data-theme="dark"] {
