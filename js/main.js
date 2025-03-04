@@ -121,8 +121,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function checkScroll() {
         const scrollPosition = window.scrollY;
-
-        if (scrollPosition > startSectionHeight) {
+        const viewportHeight = window.innerHeight;
+        
+        if (scrollPosition >= viewportHeight) {
             header.classList.add('visible');
         } else {
             header.classList.remove('visible');
@@ -344,4 +345,15 @@ document.addEventListener('DOMContentLoaded', function() {
             startSection.style.opacity = 1;
         }
     });
+
+    // Initialize Game of Life
+    try {
+        const gameCanvas = document.getElementById('gameOfLife');
+        if (gameCanvas) {
+            const game = new GameOfLifeSimulation('gameOfLife');
+            console.log('Game of Life initialized successfully');
+        }
+    } catch (error) {
+        console.error('Error initializing Game of Life:', error);
+    }
 });

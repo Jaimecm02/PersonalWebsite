@@ -1,32 +1,47 @@
-class GameOfLife {
+class GameOfLifeSimulation {
     constructor(canvasId) {
+        // Initialize canvas and context
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
-        this.cellSize = 20;
+        
+        // Set up grid parameters
+        this.cellSize = 10;
         this.cols = Math.floor(this.canvas.width / this.cellSize);
         this.rows = Math.floor(this.canvas.height / this.cellSize);
-        this.grid = this.createGrid();
+        
+        // Initialize game state
+        this.grid = this.createEmptyGrid();
         this.isRunning = false;
         this.intervalId = null;
-
-        // Bind event listeners
-        this.canvas.addEventListener('click', this.handleClick.bind(this));
-        document.getElementById('startStop').addEventListener('click', this.toggleSimulation.bind(this));
-        document.getElementById('clear').addEventListener('click', this.clearGrid.bind(this));
-        document.getElementById('random').addEventListener('click', this.randomize.bind(this));
-
+        
+        // Bind methods to maintain correct 'this' context
+        this.handleClick = this.handleClick.bind(this);
+        this.toggleSimulation = this.toggleSimulation.bind(this);
+        this.clearGrid = this.clearGrid.bind(this);
+        this.randomize = this.randomize.bind(this);
+        
+        // Set up event listeners
+        this.setupEventListeners();
+        
         // Initial render
         this.render();
+        
+        console.log('Game of Life constructor completed');
     }
 
-    createGrid() {
+    createEmptyGrid() {
         return Array(this.rows).fill().map(() => Array(this.cols).fill(0));
     }
 
     handleClick(event) {
+        console.log('Canvas clicked');
         const rect = this.canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        
+        const x = (event.clientX - rect.left) * scaleX;
+        const y = (event.clientY - rect.top) * scaleY;
+        
         const col = Math.floor(x / this.cellSize);
         const row = Math.floor(y / this.cellSize);
 
@@ -36,24 +51,60 @@ class GameOfLife {
         }
     }
 
-    toggleSimulation() {
-        if (this.isRunning) {
-            clearInterval(this.intervalId);
-            this.isRunning = false;
+    setupEventListeners() {
+        // Canvas click handler
+        if (this.canvas) {
+            this.canvas.addEventListener('click', this.handleClick);
+            console.log('Canvas click listener added');
+        }
+
+        // Button handlers
+        const startStopBtn = document.getElementById('startStop');
+        const clearBtn = document.getElementById('clear');
+        const randomBtn = document.getElementById('random');
+
+        if (startStopBtn) {
+            startStopBtn.addEventListener('click', this.toggleSimulation);
+            console.log('Start/Stop button listener added');
         } else {
+            console.warn('Start/Stop button not found');
+        }
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', this.clearGrid);
+            console.log('Clear button listener added');
+        } else {
+            console.warn('Clear button not found');
+        }
+
+        if (randomBtn) {
+            randomBtn.addEventListener('click', this.randomize);
+            console.log('Random button listener added');
+        } else {
+            console.warn('Random button not found');
+        }
+    }
+
+    toggleSimulation() {
+        console.log('Toggle simulation clicked');
+        this.isRunning = !this.isRunning;
+        if (this.isRunning) {
             this.intervalId = setInterval(() => this.update(), 100);
-            this.isRunning = true;
+        } else {
+            clearInterval(this.intervalId);
         }
     }
 
     clearGrid() {
-        this.grid = this.createGrid();
+        console.log('Clear grid clicked');
+        this.grid = this.createEmptyGrid();
         this.render();
     }
 
     randomize() {
-        this.grid = this.grid.map(row => 
-            row.map(() => Math.random() > 0.7 ? 1 : 0)
+        console.log('Randomize clicked');
+        this.grid = Array(this.rows).fill().map(() => 
+            Array(this.cols).fill().map(() => Math.random() > 0.7 ? 1 : 0)
         );
         this.render();
     }
@@ -72,7 +123,7 @@ class GameOfLife {
     }
 
     update() {
-        const newGrid = this.createGrid();
+        const newGrid = this.createEmptyGrid();
         
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; col < this.cols; col++) {
@@ -105,7 +156,8 @@ class GameOfLife {
                 this.ctx.strokeRect(x, y, this.cellSize, this.cellSize);
 
                 if (this.grid[row][col]) {
-                    this.ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
+                    this.ctx.fillStyle = getComputedStyle(document.documentElement)
+                        .getPropertyValue('--primary-color').trim() || '#000';
                     this.ctx.fillRect(x, y, this.cellSize, this.cellSize);
                 }
             }
@@ -113,7 +165,5 @@ class GameOfLife {
     }
 }
 
-// Initialize the game when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new GameOfLife('gameOfLife');
-});
+// Export the class to window object
+window.GameOfLifeSimulation = GameOfLifeSimulation;

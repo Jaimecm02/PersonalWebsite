@@ -88,29 +88,35 @@
     }
 }
 
+#gameOfLife {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: var(--card-bg);
+    z-index: 99;
+    margin: 0 auto;
+    display: block;
+}
+
 .game-controls {
     margin: 15px 0;
     display: flex;
     gap: 10px;
     justify-content: center;
+    z-index: 100;
+    position: relative;
 }
 
 .game-controls button {
     padding: 8px 16px;
     background-color: var(--primary-color);
-    color: var(--text-color);
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    z-index: 101;
 }
 
 .game-controls button:hover {
     background-color: var(--secondary-color);
-}
-
-#gameOfLife {
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0);
 }
