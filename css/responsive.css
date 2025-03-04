@@ -1,30 +1,5 @@
 @import 'variables.css';
 
-@media (max-width: 992px) {
-    .timeline::after {
-        left: 31px;
-    }
-
-    .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
-    }
-
-    .timeline-item::after {
-        left: 21px;
-    }
-
-    .left, .right {
-        left: 0;
-        text-align: left;
-    }
-
-    .left::after, .right::after {
-        left: 21px;
-    }
-}
-
 @media (max-width: 768px) {
     .hero {
         flex-direction: column-reverse;

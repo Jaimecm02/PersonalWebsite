@@ -79,7 +79,7 @@
 }
 
 .start-title {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
@@ -104,6 +104,17 @@
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     padding: 10px 20px;
+    position: absolute;
+    bottom: 20px;
+    display: inline-block;
+}
+
+.btn-download-cv {
+    left:0;
+}
+
+.btn-contact {
+    right:0;
 }
 
 .btn-download-cv:hover,

@@ -1,10 +1,10 @@
 @import 'variables.css';
 
-.hero {
+.hero .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 80px 0;
+    padding: 80px 8%;
     gap: 60px;
     position: relative;
 }
@@ -172,7 +172,7 @@
 
 /* Mobile-first adjustments */
 @media (max-width: 767px) {
-    .hero {
+    .hero .container {
       flex-direction: column;
       gap: 30px;
     }
@@ -187,12 +187,24 @@
       max-width: 600px;
       height: 400px; /* More horizontal aspect ratio */
     }
-  }
+}
   
-  /* Desktop-specific image sizing */
-  @media (min-width: 768px) {
-    .hero-image img {
-      width: 400px;
-      height: 600px; /* Maintain vertical aspect ratio */
+/* Desktop-specific image sizing and positioning */
+@media (min-width: 768px) {
+    .hero .container {
+        flex-direction: row; /* Ensure row layout on desktop */
     }
-  }
+
+    .hero-image {
+        order: 2; /* Move image to the right */
+    }
+
+    .hero-content {
+        order: 1; /* Keep content on the left */
+    }
+
+    .hero-image img {
+        width: 400px;
+        height: 600px; /* Maintain vertical aspect ratio */
+    }
+}
