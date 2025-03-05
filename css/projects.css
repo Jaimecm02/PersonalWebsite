@@ -5,10 +5,7 @@
 }
 
 .project-card {
-    background-color: var(--card-bg);
-    border-radius: 10px;
     padding: 30px;
-    box-shadow: var(--shadow);
     text-align: center;
     position: relative;
     margin-bottom: 20px;
@@ -77,7 +74,6 @@
 
 .project-content {
     position: relative;
-    background-color: var(--card-bg);
 }
 
 /* Mobile Styles */

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="fonts/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    
 </head>
 <body data-theme="light">
     <div class="page-wrap"></div>
@@ -92,35 +93,148 @@
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title">TECHNICAL SKILLS</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Programming Languages & Tools</h3>
-                    <ul class="skill-list">
-                        <li><i class="fas fa-check-circle"></i> Python (Advanced): NumPy, SciPy, Pandas, Matplotlib</li>
-                        <li><i class="fas fa-check-circle"></i> AI/ML: TensorFlow, PyTorch, YOLO, OpenCV</li>
-                        <li><i class="fas fa-check-circle"></i> Web: JavaScript, React.js, HTML5, CSS3</li>
-                        <li><i class="fas fa-check-circle"></i> Version Control: Git, VS Code, MATLAB</li>
-                    </ul>
+
+            <div class="skill-category">
+                <h3>PROGRAMMING LANGUAJES & TOOLS</h3>
+                <div class="code-editors-container">
+                    <!-- Python Editor -->
+                    <div class="code-editor python">
+                        <div class="editor-header">
+                            <span class="language">Python</span>
+                            <div class="buttons">
+                                <span class="circle red"></span>
+                                <span class="circle yellow"></span>
+                                <span class="circle green"></span>
+                            </div>
+                        </div>
+                        <div class="editor-content">
+                            <pre><code>
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+
+def hello_world():
+    print("Hello from Python!")
+
+hello_world()
+                            </code></pre>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript Editor -->
+                    <div class="code-editor javascript">
+                        <div class="editor-header">
+                            <span class="language">JavaScript</span>
+                            <div class="buttons">
+                                <span class="circle red"></span>
+                                <span class="circle yellow"></span>
+                                <span class="circle green"></span>
+                            </div>
+                        </div>
+                        <div class="editor-content">
+                            <pre><code>
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const HelloWorld = () => {
+    return <h5>Hello from React!</h5>;
+}
+
+ReactDOM.render(<HelloWorld />, 
+    document.getElementById('root'));
+                            </code></pre>
+                        </div>
+                    </div>
+
+                <!-- Machine Learning - TensorFlow -->
+                <div class="code-editor tensorflow">
+                    <div class="editor-header">
+                        <span class="language">TensorFlow</span>
+                        <div class="buttons">
+                            <span class="circle red"></span>
+                            <span class="circle yellow"></span>
+                            <span class="circle green"></span>
+                        </div>
+                    </div>
+                    <div class="editor-content">
+                        <pre><code class="language-python">
+import tensorflow as tf
+from tensorflow import keras
+
+# Create a simple neural network
+model = keras.Sequential([
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dropout(0.2),
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# Compile the model
+model.compile(
+    optimizer='adam',
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
+)
+                        </code></pre>
+                    </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Medical Software & 3D Modeling</h3>
-                    <ul class="skill-list">
-                        <li><i class="fas fa-check-circle"></i> 3D Slicer (Advanced)</li>
-                        <li><i class="fas fa-check-circle"></i> Blender</li>
-                        <li><i class="fas fa-check-circle"></i> Medical Imaging Processing</li>
-                        <li><i class="fas fa-check-circle"></i> Biomodel Development</li>
-                    </ul>
+
+                <!-- Machine Learning - PyTorch -->
+                <div class="code-editor pytorch">
+                    <div class="editor-header">
+                        <span class="language">PyTorch</span>
+                        <div class="buttons">
+                            <span class="circle red"></span>
+                            <span class="circle yellow"></span>
+                            <span class="circle green"></span>
+                        </div>
+                    </div>
+                    <div class="editor-content">
+                        <pre><code class="language-python">
+import torch
+import torch.nn as nn
+
+# Define a neural network
+class NeuralNetwork(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.layers = nn.Sequential(
+            nn.Linear(784, 128),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(128, 10),
+            nn.Softmax(dim=1)
+        )
+
+    def forward(self, x):
+        return self.layers(x)
+
+# Create model instance
+model = NeuralNetwork()
+                        </code></pre>
+                    </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Domain Expertise</h3>
-                    <ul class="skill-list">
-                        <li><i class="fas fa-check-circle"></i> Medical Image Analysis</li>
-                        <li><i class="fas fa-check-circle"></i> Signal Processing</li>
-                        <li><i class="fas fa-check-circle"></i> Biomechanics</li>
-                        <li><i class="fas fa-check-circle"></i> Cardiovascular Modeling</li>
-                        <li><i class="fas fa-check-circle"></i> Machine Learning in Healthcare</li>
-                    </ul>
+
                 </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Medical Software & 3D Modeling</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check-circle"></i> 3D Slicer (Advanced)</li>
+                    <li><i class="fas fa-check-circle"></i> Blender</li>
+                    <li><i class="fas fa-check-circle"></i> Medical Imaging Processing</li>
+                    <li><i class="fas fa-check-circle"></i> Biomodel Development</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Domain Expertise</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check-circle"></i> Medical Image Analysis</li>
+                    <li><i class="fas fa-check-circle"></i> Signal Processing</li>
+                    <li><i class="fas fa-check-circle"></i> Biomechanics</li>
+                    <li><i class="fas fa-check-circle"></i> Cardiovascular Modeling</li>
+                    <li><i class="fas fa-check-circle"></i> Machine Learning in Healthcare</li>
+                </ul>
             </div>
         </div>
     </section>

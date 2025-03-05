@@ -17,264 +17,7 @@ function scrollToSection(sectionId) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-
-    // Check for saved theme in localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        body.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-    } else {
-        // Default to light theme
-        body.setAttribute('data-theme', 'light');
-        updateThemeIcon('light');
-    }
-
-    // Function to update the theme icon with animation
-    function updateThemeIcon(theme) {
-        const icons = themeToggle.querySelectorAll('.icon');
-        icons.forEach(icon => {
-            icon.classList.remove('showing', 'hiding', 'hidden');
-        });
-
-        if (theme === 'dark') {
-            icons[0].classList.add('hiding'); // Hide moon icon
-            icons[1].classList.add('showing'); // Show sun icon
-        } else {
-            icons[1].classList.add('hiding'); // Hide sun icon
-            icons[0].classList.add('showing'); // Show moon icon
-        }
-    }
-
-    // Toggle theme on button click
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme); // Save theme preference
-        updateThemeIcon(newTheme);
-    });
-
-    // Mobile menu functionality
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    const menuBackdrop = document.createElement('div');
-    document.body.appendChild(menuBackdrop);
-
-    mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
-        menuBackdrop.classList.toggle('show');
-        mobileMenuBtn.classList.toggle('active');
-    });
-
-    // Close the menu when clicking outside or on the backdrop
-    menuBackdrop.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-        menuBackdrop.classList.remove('show');
-        mobileMenuBtn.classList.remove('active');
-    });
-
-    // Close the menu when a link is clicked (optional)
-    navLinks.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
-            navLinks.classList.remove('show');
-            menuBackdrop.classList.remove('show');
-            mobileMenuBtn.classList.remove('active');
-        }
-    });
-
-    // Contact and CV download functionality
-    const contactBtn = document.querySelector(".btn-contact");
-    const downloadBtn = document.querySelector(".btn-download-cv");
-    const heroDownloadBtn = document.getElementById("hero-download-cv");
-
-    // "Contact Me" button scrolls to the about section
-    contactBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        scrollToSection("#about");
-    });
-
-    // "Download CV" button triggers file download
-    downloadBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        downloadCV();
-    });
-
-    // "Download CV" button in the hero section
-    heroDownloadBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        downloadCV();
-    });
-
-    // Check if we're on mobile
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-    const pageWrap = document.querySelector('.page-wrap');
-    pageWrap.classList.add('reveal');
-
-    const header = document.querySelector('header');
-    const startSection = document.querySelector('.start');
-    const startSectionHeight = startSection.offsetHeight;
-
-    function checkScroll() {
-        const scrollPosition = window.scrollY;
-        const viewportHeight = window.innerHeight;
-        
-        if (scrollPosition >= viewportHeight) {
-            header.classList.add('visible');
-        } else {
-            header.classList.remove('visible');
-        }
-    }
-
-    // Initial check in case the page is loaded with a scroll position
-    checkScroll();
-
-    // Add scroll event listener
-    window.addEventListener('scroll', checkScroll);
-
-    const heroContent = document.querySelector('.hero-content');
-    const subtitle = document.querySelector('.subtitle');
-
-    const transitionDuration = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-wrap-transition')) * 1000;
-
-    setTimeout(() => {
-        startSection.classList.add('animate');
-        heroContent.classList.add('animate-hero');
-        subtitle.computedStyleMap.opacity = 1;
-        pageWrap.style.display = 'none';
-    }, transitionDuration);
-
-    // Text scramble animation
-    textScrumbleAnimation();
-
-    // Project data with preview information
-    const projectPreviews = {
-        'Document Similarity Analyzer': {
-            type: 'image',
-            src: 'assets/images/DocumentSimilarityScreenshot.png',
-            alt: 'Document Similarity Tool Interface',
-            caption: 'TF-IDF visualization of document similarity'
-        },
-        'Daily Habit Tracker': {
-            type: 'image',
-            src: 'assets/images/HabitTrackerScreenshot.png',
-            alt: 'Habit Tracker App Demo',
-            caption: 'User interface for tracking daily habits'
-        },
-    };
-
-    // Get all project cards
-    const projectCards = document.querySelectorAll('.project-card');
-
-    // For each project card
-    projectCards.forEach(card => {
-        // Get the project title
-        const titleElement = card.querySelector('.project-title');
-        const title = titleElement.textContent;
-
-        // Get preview data for this project
-        const previewData = projectPreviews[title];
-
-        if (previewData) {
-            // Create preview container
-            const previewContainer = document.createElement('div');
-            previewContainer.className = 'project-preview';
-
-            // Create preview content
-            let previewContent;
-            if (previewData.type === 'video') {
-                previewContent = document.createElement('video');
-                previewContent.src = previewData.src;
-                previewContent.alt = previewData.alt;
-                previewContent.autoplay = true;
-                previewContent.loop = true;
-                previewContent.muted = true;
-            } else {
-                // For both image and gif
-                previewContent = document.createElement('img');
-                previewContent.src = previewData.src;
-                previewContent.alt = previewData.alt;
-            }
-
-            // Add caption
-            const caption = document.createElement('div');
-            caption.className = 'preview-caption';
-            caption.textContent = previewData.caption;
-
-            // Add to preview container
-            previewContainer.appendChild(previewContent);
-            previewContainer.appendChild(caption);
-
-            // For mobile, add a close button
-            if (isMobile) {
-                const closeButton = document.createElement('button');
-                closeButton.className = 'preview-close';
-                closeButton.innerHTML = '&times;';
-                closeButton.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    previewContainer.classList.remove('show');
-                });
-                previewContainer.appendChild(closeButton);
-
-                // Show preview on tap
-                card.addEventListener('click', function(e) {
-                    // Don't trigger if clicking on the link
-                    if (!e.target.closest('.project-link')) {
-                        e.preventDefault();
-                        previewContainer.classList.add('show');
-                    }
-                });
-            }
-
-            // Create a wrapper for the existing content
-            const contentWrapper = document.createElement('div');
-            contentWrapper.className = 'project-content';
-
-            // Move all existing children to the wrapper
-            while (card.firstChild) {
-                contentWrapper.appendChild(card.firstChild);
-            }
-
-            // Add the content wrapper and preview to the card
-            card.appendChild(contentWrapper);
-            card.appendChild(previewContainer);
-        }
-    });
-
-    // Close all previews when clicking outside
-    if (isMobile) {
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.project-preview') && !e.target.closest('.project-card')) {
-                document.querySelectorAll('.project-preview.show').forEach(preview => {
-                    preview.classList.remove('show');
-                });
-            }
-        });
-    }
-});
-
-function textScrumbleAnimation() {
-    const el = document.getElementById('text_scrumble');
-    if(el) {
-        let phrases = el.getAttribute('data-phrases').slice(0, -1);
-        phrases = phrases.split(',');
-
-        const fx = new TextScramble(el);
-        let counter = 0;
-        const next = () => {
-            fx.setText(phrases[counter]).then(() => {
-                setTimeout(next, 1500);
-            });
-            counter = (counter + 1) % phrases.length;
-        };
-        next();
-    }
-}
-
+// Text scramble animation class
 class TextScramble {
     constructor(el) {
         this.el = el;
@@ -329,22 +72,232 @@ class TextScramble {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+// Text scramble animation function
+function textScrumbleAnimation() {
+    const el = document.getElementById('text_scrumble');
+    if(el) {
+        let phrases = el.getAttribute('data-phrases').slice(0, -1);
+        phrases = phrases.split(',');
+
+        const fx = new TextScramble(el);
+        let counter = 0;
+        const next = () => {
+            fx.setText(phrases[counter]).then(() => {
+                setTimeout(next, 1500);
+            });
+            counter = (counter + 1) % phrases.length;
+        };
+        next();
+    }
+}
+
+// Typing effect functions
+function typeCode(element, text, speed = 50) {
+    let index = 0;
+    element.textContent = '';
+    
+    function type() {
+        if (index < text.length) {
+            element.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, speed);
+        }
+    }
+    
+    type();
+}
+
+function initializeTypingEffects() {
+    try {
+        const typingConfigs = {
+            'python': { speed: 50 },
+            'javascript': { speed: 55 },
+            'tensorflow': { speed: 60 },
+            'pytorch': { speed: 65 }
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const codeElement = entry.target;
+                    const editorType = codeElement.closest('.code-editor')?.classList[1];
+                    if (editorType) {
+                        const speed = typingConfigs[editorType]?.speed || 50;
+                        const originalText = codeElement.textContent.trim();
+                        typeCode(codeElement, originalText, speed);
+                        observer.unobserve(codeElement);
+                    }
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        const codeElements = document.querySelectorAll('.editor-content code');
+        if (codeElements.length > 0) {
+            codeElements.forEach(code => {
+                code.dataset.originalText = code.textContent.trim();
+                code.textContent = '';
+                observer.observe(code);
+            });
+        }
+    } catch (error) {
+        console.error('Error initializing typing effects:', error);
+    }
+}
+
+function resetTypingEffects() {
+    document.querySelectorAll('.editor-content code').forEach(code => {
+        if (code.dataset.originalText) {
+            code.textContent = '';
+            typeCode(code, code.dataset.originalText);
+        }
+    });
+}
+
+// Main document ready event listener
+document.addEventListener("DOMContentLoaded", function () {
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+    } else {
+        body.setAttribute('data-theme', 'light');
+        updateThemeIcon('light');
+    }
+
+    function updateThemeIcon(theme) {
+        const icons = themeToggle.querySelectorAll('.icon');
+        icons.forEach(icon => {
+            icon.classList.remove('showing', 'hiding', 'hidden');
+        });
+
+        if (theme === 'dark') {
+            icons[0].classList.add('hiding');
+            icons[1].classList.add('showing');
+        } else {
+            icons[1].classList.add('hiding');
+            icons[0].classList.add('showing');
+        }
+    }
+
+    // Theme toggle click handler
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+
+    // Mobile menu functionality
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const menuBackdrop = document.createElement('div');
+    document.body.appendChild(menuBackdrop);
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+        menuBackdrop.classList.toggle('show');
+        mobileMenuBtn.classList.toggle('active');
+    });
+
+    menuBackdrop.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+        menuBackdrop.classList.remove('show');
+        mobileMenuBtn.classList.remove('active');
+    });
+
+    navLinks.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            navLinks.classList.remove('show');
+            menuBackdrop.classList.remove('show');
+            mobileMenuBtn.classList.remove('active');
+        }
+    });
+
+    // Button functionality
+    const contactBtn = document.querySelector(".btn-contact");
+    const downloadBtn = document.querySelector(".btn-download-cv");
+    const heroDownloadBtn = document.getElementById("hero-download-cv");
+
+    contactBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        scrollToSection("#about");
+    });
+
+    downloadBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        downloadCV();
+    });
+
+    heroDownloadBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        downloadCV();
+    });
+
+    // Page initialization
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const pageWrap = document.querySelector('.page-wrap');
+    pageWrap.classList.add('reveal');
+
+    const header = document.querySelector('header');
     const startSection = document.querySelector('.start');
     const heroSection = document.querySelector('.hero');
-    
-    window.addEventListener('scroll', function() {
+    const heroContent = document.querySelector('.hero-content');
+    const subtitle = document.querySelector('.subtitle');
+
+    function checkScroll() {
         const scrollPosition = window.scrollY;
-        const heroOffset = heroSection.offsetTop - window.innerHeight;
+        const viewportHeight = window.innerHeight;
         
-        // Add fade effect to start section as hero section covers it
+        if (scrollPosition >= viewportHeight) {
+            header.classList.add('visible');
+        } else {
+            header.classList.remove('visible');
+        }
+    
+        if (scrollPosition >= viewportHeight * 0.8) {
+            startSection.classList.add('hidden');
+        } else {
+            startSection.classList.remove('hidden');
+        }
+
+        // Handle start section fade
+        const heroOffset = heroSection.offsetTop - window.innerHeight;
         if (scrollPosition >= heroOffset) {
             const opacity = 1 - (scrollPosition - heroOffset) / window.innerHeight;
             startSection.style.opacity = Math.max(opacity, 0);
         } else {
             startSection.style.opacity = 1;
         }
-    });
+
+        // Reset typing effects when scrolling back to top
+        if (scrollPosition === 0) {
+            resetTypingEffects();
+        }
+    }
+
+    window.addEventListener('scroll', checkScroll);
+    checkScroll(); // Initial check
+
+    const transitionDuration = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-wrap-transition')) * 1000;
+
+    setTimeout(() => {
+        startSection.classList.add('animate');
+        heroContent.classList.add('animate-hero');
+        subtitle.style.opacity = 1;
+        pageWrap.style.display = 'none';
+    }, transitionDuration);
+
+    // Initialize animations
+    textScrumbleAnimation();
+    initializeTypingEffects();
 
     // Initialize Game of Life
     try {

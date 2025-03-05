@@ -32,6 +32,15 @@
     background-color: var(--section-bg);
     position: relative;
     overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.start.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .start {
@@ -95,14 +104,15 @@
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .start-subtitle {
-    font-size: 1.5rem;
-    color: var(--primary-color);
+    font-size: 1.3rem;
+    color: var(--text-color);
     margin-bottom: 20px;
     width: 100%;
+    font-family: var(--code-font);
 }
 
 .btn-download-cv,
