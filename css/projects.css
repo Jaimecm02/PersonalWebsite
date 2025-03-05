@@ -116,3 +116,18 @@
 .game-controls button:hover {
     background-color: var(--secondary-color);
 }
+
+.project-preview {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    aspect-ratio: 1;
+}
+
+#gameOfLife {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: var(--card-bg);
+}

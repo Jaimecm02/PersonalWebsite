@@ -4,29 +4,65 @@ class GameOfLifeSimulation {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
         
+        // Set up initial dimensions
+        this.resizeCanvas();
+        
         // Set up grid parameters
         this.cellSize = 10;
-        this.cols = Math.floor(this.canvas.width / this.cellSize);
-        this.rows = Math.floor(this.canvas.height / this.cellSize);
+        this.updateGridDimensions();
         
         // Initialize game state
         this.grid = this.createEmptyGrid();
         this.isRunning = false;
         this.intervalId = null;
         
-        // Bind methods to maintain correct 'this' context
+        // Bind methods
         this.handleClick = this.handleClick.bind(this);
         this.toggleSimulation = this.toggleSimulation.bind(this);
         this.clearGrid = this.clearGrid.bind(this);
         this.randomize = this.randomize.bind(this);
+        this.handleResize = this.handleResize.bind(this);
         
         // Set up event listeners
         this.setupEventListeners();
         
+        // Add resize event listener
+        window.addEventListener('resize', this.handleResize);
+        
         // Initial render
         this.render();
+    }
+
+    resizeCanvas() {
+        const container = this.canvas.parentElement;
+        const containerWidth = container.clientWidth;
+        const maxWidth = Math.min(containerWidth, 600); // Maximum width of 600px
         
-        console.log('Game of Life constructor completed');
+        this.canvas.width = maxWidth;
+        this.canvas.height = maxWidth; // Keep it square
+    }
+    
+    updateGridDimensions() {
+        this.cols = Math.floor(this.canvas.width / this.cellSize);
+        this.rows = Math.floor(this.canvas.height / this.cellSize);
+    }
+    
+    handleResize() {
+        this.resizeCanvas();
+        this.updateGridDimensions();
+        
+        // Create new grid with new dimensions
+        const newGrid = this.createEmptyGrid();
+        
+        // Copy existing grid data to new grid
+        for (let row = 0; row < Math.min(this.grid.length, this.rows); row++) {
+            for (let col = 0; col < Math.min(this.grid[0].length, this.cols); col++) {
+                newGrid[row][col] = this.grid[row][col];
+            }
+        }
+        
+        this.grid = newGrid;
+        this.render();
     }
 
     createEmptyGrid() {
@@ -34,7 +70,6 @@ class GameOfLifeSimulation {
     }
 
     handleClick(event) {
-        console.log('Canvas clicked');
         const rect = this.canvas.getBoundingClientRect();
         const scaleX = this.canvas.width / rect.width;
         const scaleY = this.canvas.height / rect.height;
@@ -42,9 +77,12 @@ class GameOfLifeSimulation {
         const x = (event.clientX - rect.left) * scaleX;
         const y = (event.clientY - rect.top) * scaleY;
         
-        const col = Math.floor(x / this.cellSize);
-        const row = Math.floor(y / this.cellSize);
-
+        const cellWidth = this.canvas.width / this.cols;
+        const cellHeight = this.canvas.height / this.rows;
+        
+        const col = Math.floor(x / cellWidth);
+        const row = Math.floor(y / cellHeight);
+    
         if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
             this.grid[row][col] = this.grid[row][col] ? 0 : 1;
             this.render();
@@ -147,18 +185,21 @@ class GameOfLifeSimulation {
     render() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
+        const cellWidth = this.canvas.width / this.cols;
+        const cellHeight = this.canvas.height / this.rows;
+        
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; col < this.cols; col++) {
-                const x = col * this.cellSize;
-                const y = row * this.cellSize;
-
+                const x = col * cellWidth;
+                const y = row * cellHeight;
+    
                 this.ctx.strokeStyle = '#ddd';
-                this.ctx.strokeRect(x, y, this.cellSize, this.cellSize);
-
+                this.ctx.strokeRect(x, y, cellWidth, cellHeight);
+    
                 if (this.grid[row][col]) {
                     this.ctx.fillStyle = getComputedStyle(document.documentElement)
                         .getPropertyValue('--primary-color').trim() || '#000';
-                    this.ctx.fillRect(x, y, this.cellSize, this.cellSize);
+                    this.ctx.fillRect(x, y, cellWidth, cellHeight);
                 }
             }
         }
