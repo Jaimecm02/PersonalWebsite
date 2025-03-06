@@ -131,3 +131,199 @@
     border: 1px solid #ddd;
     background-color: var(--card-bg);
 }
+
+.project-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  padding-top: 150%;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Tablet breakpoint */
+@media (max-width: 768px) {
+  .project-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 600px;
+  }
+  
+  .card {
+    max-width: 240px;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 480px) {
+  .project-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .card {
+    max-width: 160px;
+  }
+}
+
+/* Solid color cards */
+.card.blue-solid {
+  background-color: #2193b0;
+  box-shadow: 0 4px 15px rgba(33, 147, 176, 0.3);
+}
+
+.card.purple-solid {
+  background-color: #834d9b;
+  box-shadow: 0 4px 15px rgba(131, 77, 155, 0.3);
+}
+
+.card.green-solid {
+  background-color: #2ecc71;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+/* Gradient cards */
+.card.orange-gradient {
+  background: linear-gradient(45deg, #ff4e50, #f9d423);
+  box-shadow: 0 4px 15px rgba(255, 78, 80, 0.3);
+}
+
+.card.pink-gradient {
+  background: linear-gradient(45deg, #ff758c, #ff7eb3);
+  box-shadow: 0 4px 15px rgba(255, 117, 140, 0.3);
+}
+
+.card.teal-gradient {
+  background: linear-gradient(45deg, #11998e, #38ef7d);
+  box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+}
+
+/* Hover effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional animation for heart click */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.heart-button.pop i {
+  animation: heartPop 0.3s ease;
+}
+
+/* Update these styles */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  padding-top: 150%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heart-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: none;
+  border: none;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+  padding: 0;
+}
+
+.heart-button i {
+  color: white;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.heart-button:hover {
+  transform: scale(1.1);
+}
+
+.heart-button.active {
+  background: none; /* Remove the white background when active */
+}
+
+.heart-button.active i {
+  color: #ff4444;
+}
+
+/* Remove any focus styles */
+.heart-button:focus {
+  outline: none;
+  background: none;
+}
+
+/* Remove any default button styles */
+.heart-button:active,
+.heart-button:focus-visible {
+  background: none;
+  outline: none;
+}
+
+.color-info {
+  position: absolute;
+  font-family: var(--code-font);
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(2px); /* Slight blur effect */
+}
+
+.color-code {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: monospace;
+  text-align: left;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Text shadow for better readability */
+}

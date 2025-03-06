@@ -310,3 +310,67 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Error initializing Game of Life:', error);
     }
 });
+
+document.querySelectorAll('.heart-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Toggle active class
+        this.classList.toggle('active');
+        
+        // Add pop animation class
+        this.classList.add('pop');
+        
+        // Toggle heart icon
+        const icon = this.querySelector('i');
+        if (this.classList.contains('active')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+        } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+        }
+        
+        // Remove pop class after animation
+        setTimeout(() => {
+            this.classList.remove('pop');
+        }, 300);
+    });
+});
+
+// Only run on desktop
+if (window.innerWidth > 768) {
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+      card.addEventListener('mousemove', handleMouseMove);
+      card.addEventListener('mouseleave', handleMouseLeave);
+    });
+    
+    function handleMouseMove(e) {
+      const card = e.currentTarget;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      // Calculate rotation based on mouse position
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      
+      // Apply the transformation
+      card.style.transform = `
+        perspective(1000px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translateZ(10px)
+      `;
+    }
+    
+    function handleMouseLeave(e) {
+      const card = e.currentTarget;
+      // Reset the transformation
+      card.style.transform = 'translateZ(0)';
+    }
+  }

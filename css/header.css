@@ -5,7 +5,7 @@ header {
   position: fixed;
   top: 0; /* Add this to ensure proper positioning */
   left: 0; /* Add this to ensure proper positioning */
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
   background-color: var(--header-bg, rgba(255, 255, 255, 0.8)); /* Add fallback */
   backdrop-filter: blur(10px);
