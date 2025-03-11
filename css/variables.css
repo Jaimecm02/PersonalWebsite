@@ -18,6 +18,7 @@
     --circle-yellow: #ffbd2e;
     --circle-green: #27c93f;
     --code-font: 'JetBrains Mono', monospace;
+    --separator-color: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] {
@@ -32,4 +33,5 @@
     --editor-header-bg: #2d2d2d;
     --editor-bg: #1e1e1e;
     --editor-text: #ffffff;
+    --separator-color: rgba(255, 255, 255, 0.1);
 }

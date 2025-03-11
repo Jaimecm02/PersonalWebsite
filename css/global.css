@@ -43,3 +43,47 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.project-separator {
+  margin: 40px 0;
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+      90deg,
+      transparent,
+      var(--separator-color),
+      transparent
+  );
+}
+
+.project-separator i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background-color);
+  padding: 0 15px;
+  color: var(--secondary-color);
+}
+
+.separator-line {
+  height: 1px;
+  width: 100px;
+  background: linear-gradient(
+      to right,
+      transparent,
+      var(--separator-color),
+      transparent
+  );
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-separator {
+      margin: 20px 0;
+  }
+  
+  .separator-line {
+      width: 80px;
+  }
+}
